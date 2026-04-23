@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Neo — Book a Discovery Call</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080908;--bg2:#0d0f0d;--bg3:#111311;--g:#00e63d;--g3:rgba(0,230,61,0.06);--gb:rgba(0,230,61,0.2);--w:#f5f7f5;--w2:#c8cec8;--muted:#5c665c;--display:'Bebas Neue',sans-serif;--serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;}
+body{background:var(--bg);color:var(--w);font-family:var(--sans);overflow-x:hidden;cursor:none;}
+.cur{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:exclusion;}
+.cur-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(0,230,61,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .45s,height .45s,border-color .3s;}
+body:has(a:hover) .cur-ring{width:58px;height:58px;border-color:var(--g);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;transition:all .5s;}
+nav.solid{background:rgba(8,9,8,.94);border-bottom:1px solid rgba(0,230,61,.08);backdrop-filter:blur(20px);}
+.nav-logo{font-family:var(--display);font-size:1.3rem;letter-spacing:.1em;color:var(--g);text-decoration:none;}
+.nav-logo em{color:var(--w);font-style:normal;}
+.nav-back{font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.12em;text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--w);}
+.container{max-width:1100px;margin:0 auto;padding:0 40px;}
+.hero-disc{padding:140px 0 80px;position:relative;overflow:hidden;}
+.hero-disc::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(0,230,61,.06) 0%,transparent 70%);pointer-events:none;}
+.disc-tag{font-family:var(--mono);font-size:.62rem;color:var(--g);letter-spacing:.22em;margin-bottom:28px;display:flex;align-items:center;gap:12px;animation:up .7s ease .1s both;}
+.disc-tag::before{content:'';width:28px;height:1px;background:var(--g);}
+.disc-h{font-family:var(--display);font-size:clamp(3rem,8vw,7rem);line-height:.9;letter-spacing:.02em;margin-bottom:24px;animation:up 1s cubic-bezier(.16,1,.3,1) .2s both;}
+.disc-h em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--w2);display:block;font-size:.55em;line-height:1.1;}
+.disc-h .g{color:var(--g);}
+.disc-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:520px;font-weight:300;animation:up .7s ease .4s both;}
+.disc-sub strong{color:var(--w2);font-weight:400;}
+.slots-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.62rem;color:var(--g);letter-spacing:.15em;border:1px solid var(--gb);background:var(--g3);padding:10px 20px;margin-top:28px;animation:up .6s ease .6s both;}
+.sdot{width:6px;height:6px;background:var(--g);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.rule{height:1px;background:rgba(245,247,245,.06);}
+.main-grid{padding:80px 0 100px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.etag{font-family:var(--mono);font-size:.6rem;color:var(--g);letter-spacing:.22em;margin-bottom:18px;}
+.etitle{font-family:var(--display);font-size:clamp(1.8rem,3vw,3rem);letter-spacing:.03em;line-height:1;margin-bottom:32px;}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:2px;margin-bottom:40px;}
+.exp-item{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border:1px solid rgba(0,230,61,.08);background:var(--g3);transition:all .3s;}
+.exp-item:hover{border-color:rgba(0,230,61,.2);background:rgba(0,230,61,.08);}
+.eicon{font-family:var(--mono);font-size:.6rem;color:var(--g);flex-shrink:0;margin-top:2px;}
+.etext strong{display:block;font-size:.92rem;font-weight:500;margin-bottom:4px;}
+.etext span{font-size:.82rem;color:var(--muted);line-height:1.6;font-weight:300;}
+.who-block{border:1px solid rgba(0,230,61,.08);background:var(--g3);padding:24px;}
+.who-tag{font-family:var(--mono);font-size:.56rem;color:var(--g);letter-spacing:.2em;margin-bottom:14px;}
+.who-block ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.who-block li{font-size:.85rem;color:var(--muted);line-height:1.5;padding-left:18px;position:relative;font-weight:300;}
+.who-block li::before{content:'→';position:absolute;left:0;color:var(--g);font-family:var(--mono);font-size:.72rem;}
+.panel{border:1px solid rgba(0,230,61,.15);background:var(--g3);position:relative;overflow:hidden;}
+.panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--g);}
+.panel-head{padding:24px 28px;border-bottom:1px solid rgba(0,230,61,.08);}
+.ptag{font-family:var(--mono);font-size:.56rem;color:var(--g);letter-spacing:.2em;margin-bottom:8px;}
+.ptitle{font-size:1rem;font-weight:500;color:var(--w);}
+.psub{font-size:.82rem;color:var(--muted);margin-top:6px;line-height:1.5;font-weight:300;}
+.panel-body{padding:28px;}
+.cal-block{background:rgba(0,230,61,.04);border:1px dashed rgba(0,230,61,.15);padding:32px 20px;text-align:center;margin-bottom:20px;}
+.cal-text{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.1em;line-height:1.9;}
+.cal-text strong{color:var(--g);display:block;font-size:.7rem;margin-bottom:8px;}
+.btn-cal{display:block;width:100%;background:var(--g);color:var(--bg);font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;padding:16px;cursor:none;transition:all .25s;text-align:center;text-decoration:none;text-transform:uppercase;margin-bottom:16px;}
+.btn-cal:hover{background:#00ff44;transform:translateY(-1px);}
+.or-div{display:flex;align-items:center;gap:14px;margin:20px 0;}
+.or-div::before,.or-div::after{content:'';flex:1;height:1px;background:rgba(0,230,61,.1);}
+.or-div span{font-family:var(--mono);font-size:.56rem;color:var(--muted);letter-spacing:.2em;}
+.cform{display:flex;flex-direction:column;gap:12px;}
+.flabel{font-family:var(--mono);font-size:.56rem;color:var(--g);letter-spacing:.15em;margin-bottom:4px;}
+.finp,.fsel,.ftxt{background:rgba(245,247,245,.04);border:1px solid rgba(0,230,61,.15);color:var(--w);font-family:var(--mono);font-size:.78rem;padding:12px 14px;outline:none;transition:all .25s;width:100%;}
+.finp:focus,.fsel:focus,.ftxt:focus{border-color:var(--g);background:rgba(0,230,61,.05);}
+.finp::placeholder,.ftxt::placeholder{color:rgba(92,102,92,.7);}
+.fsel{appearance:none;cursor:none;}
+.fsel option{background:#0d0f0d;}
+.ftxt{resize:vertical;min-height:90px;}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-sub{background:var(--g);color:var(--bg);border:none;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;padding:16px;cursor:none;transition:all .25s;text-transform:uppercase;width:100%;}
+.btn-sub:hover{background:#00ff44;transform:translateY(-1px);}
+.form-note{font-family:var(--mono);font-size:.54rem;color:var(--muted);letter-spacing:.06em;text-align:center;}
+.fsuccess{display:none;padding:28px;text-align:center;}
+.fsuccess .si{font-size:1.6rem;margin-bottom:12px;}
+.fsuccess h3{font-family:var(--display);font-size:1.6rem;letter-spacing:.05em;margin-bottom:8px;}
+.fsuccess p{font-size:.85rem;color:var(--muted);line-height:1.6;font-weight:300;}
+.process{padding:100px 0;background:var(--bg2);}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(0,230,61,.05);margin-top:56px;}
+.proc-step{background:var(--bg2);padding:32px 24px;transition:background .3s;}
+.proc-step:hover{background:var(--bg3);}
+.psn{font-family:var(--display);font-size:3rem;color:rgba(0,230,61,.15);line-height:1;margin-bottom:16px;transition:color .3s;}
+.proc-step:hover .psn{color:rgba(0,230,61,.35);}
+.pst{font-size:.92rem;font-weight:500;color:var(--w2);margin-bottom:8px;}
+.psd{font-size:.8rem;color:var(--muted);line-height:1.65;font-weight:300;}
+footer{border-top:1px solid rgba(0,230,61,.08);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.fl{font-family:var(--display);font-size:1rem;letter-spacing:.1em;color:var(--g);}
+.fn{display:flex;gap:20px;flex-wrap:wrap;}
+.fn a{font-family:var(--mono);font-size:.56rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;transition:color .2s;}
+.fn a:hover{color:var(--w);}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@media(max-width:768px){nav{padding:18px 24px;}.main-grid{grid-template-columns:1fr;gap:40px;padding:60px 0;}.proc-grid{grid-template-columns:1fr 1fr;}.frow2{grid-template-columns:1fr;}footer{padding:20px 24px;flex-direction:column;text-align:center;}}
+
+#pgMatrix{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.16;}
+.pg-vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(8,9,8,.7) 0%,rgba(8,9,8,0) 100%);}
+</style>
+</head>
+<body>
+<canvas id="pgMatrix"></canvas>
+<div class="pg-vig"></div>
+<div class="cur" id="cur"></div><div class="cur-ring" id="cr"></div>
+<nav id="nav"><a href="index.html" class="nav-logo">META<em>NEO</em></a><a href="index.html" class="nav-back">← Back</a></nav>
+<section class="hero-disc">
+  <div class="container">
+    <div class="disc-tag">// PRIVATE CONSULTING — LIMITED SLOTS</div>
+    <h1 class="disc-h">LET'S TALK<em>about your business.</em><span class="g">NO PITCH.<br>JUST CLARITY.</span></h1>
+    <p class="disc-sub">This call is 30 minutes. We'll look at where you are, identify your biggest gap, and figure out whether working together makes sense. <strong>No pressure. No hard sell.</strong> Just an honest conversation.</p>
+    <div class="slots-badge"><div class="sdot"></div>LIMITED CONSULTING SLOTS AVAILABLE THIS MONTH</div>
+  </div>
+</section>
+<div class="rule"></div>
+<div class="container"><div class="main-grid">
+  <div>
+    <p class="etag reveal">// WHAT HAPPENS ON THE CALL</p>
+    <h2 class="etitle reveal d1">30 minutes.<br>Real clarity.</h2>
+    <ul class="exp-list">
+      <li class="exp-item reveal"><span class="eicon">[01]</span><div class="etext"><strong>Audit your current presence</strong><span>We look at what you're doing, what's working, what isn't, and why. Honest, direct, no sugarcoating.</span></div></li>
+      <li class="exp-item reveal d1"><span class="eicon">[02]</span><div class="etext"><strong>Identify your biggest gap</strong><span>Visibility, Audience, or Conversion — we pinpoint which gap is costing you the most and what closing it is actually worth.</span></div></li>
+      <li class="exp-item reveal d2"><span class="eicon">[03]</span><div class="etext"><strong>Map a clear path forward</strong><span>Whether we work together or not, you leave with a clear picture of what needs to change and in what order.</span></div></li>
+      <li class="exp-item reveal d3"><span class="eicon">[04]</span><div class="etext"><strong>Explore if consulting makes sense</strong><span>If there's a fit, we'll talk about what working together looks like. Pricing discussed on the call — every engagement is tailored to your situation.</span></div></li>
+    </ul>
+    <div class="who-block reveal">
+      <p class="who-tag">// THIS CALL IS FOR YOU IF...</p>
+      <ul>
+        <li>You're a business owner who wants customers from social media but can't figure out why it isn't working</li>
+        <li>You're a creator who has an audience but no system to monetise it</li>
+        <li>You want someone to look at your account, your offer, and your content and tell you exactly what to fix</li>
+        <li>You're serious about growing and willing to put in the work</li>
+      </ul>
+    </div>
+  </div>
+  <div class="reveal d1">
+    <div class="panel">
+      <div class="panel-head"><p class="ptag">// BOOK YOUR CALL</p><h3 class="ptitle">30-Minute Discovery Call — Free</h3><p class="psub">Pick a time with Calendly or fill in the form and Casey will reach out within 24 hours.</p></div>
+      <div class="panel-body" id="formWrap">
+        <div class="cal-block"><div class="cal-text"><strong>BOOK INSTANTLY WITH CALENDLY</strong>Replace YOUR_CALENDLY_LINK below with your<br>real Calendly booking URL to activate this button.</div></div>
+        <a href="https://calendly.com/YOUR_CALENDLY_LINK" target="_blank" class="btn-cal">PICK A TIME — BOOK INSTANTLY →</a>
+        <div class="or-div"><span>OR LEAVE YOUR DETAILS</span></div>
+        <div class="cform">
+
+          <div class="frow2">
+            <div><p class="flabel">// FIRST NAME *</p><input type="text" class="finp" id="fn" placeholder="Your first name" required></div>
+            <div><p class="flabel">// EMAIL ADDRESS *</p><input type="email" class="finp" id="fe" placeholder="your@email.com" required></div>
+          </div>
+
+          <div class="frow2">
+            <div><p class="flabel">// INSTAGRAM HANDLE</p><input type="text" class="finp" id="fi" placeholder="@yourbusiness"></div>
+            <div><p class="flabel">// PHONE (OPTIONAL)</p><input type="text" class="finp" id="fph" placeholder="+44 7xxx xxxxxx"></div>
+          </div>
+
+          <div><p class="flabel">// WHO ARE YOU? *</p>
+            <select class="fsel finp" id="ft">
+              <option value="" disabled selected>Select one...</option>
+              <option>Small business owner</option>
+              <option>Content creator</option>
+              <option>Both — I run a business and create content</option>
+              <option>Beginner — just starting out online</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div><p class="flabel">// BUSINESS TYPE *</p><input type="text" class="finp" id="fbtype" placeholder="e.g. Aesthetic clinic, clothing brand, personal trainer, restaurant..." required></div>
+
+          <div><p class="flabel">// YOUR PRODUCTS OR SERVICES</p><input type="text" class="finp" id="fservices" placeholder="e.g. Botox, fillers, facials — or list your main offerings"></div>
+
+          <div class="frow2">
+            <div><p class="flabel">// LOCATION</p><input type="text" class="finp" id="floc" placeholder="e.g. Nottingham, UK"></div>
+            <div><p class="flabel">// WEBSITE / ONLINE STORE (IF ANY)</p><input type="text" class="finp" id="fweb" placeholder="yourwebsite.com or N/A"></div>
+          </div>
+
+          <div><p class="flabel">// DO YOU CURRENTLY RUN ANY OFFERS OR PROMOTIONS?</p>
+            <input type="text" class="finp" id="foffers" placeholder="e.g. 20% off first visit, bundle packages, seasonal deals — or leave blank and Casey can suggest some">
+          </div>
+
+          <div><p class="flabel">// CURRENT SOCIAL MEDIA PRESENCE</p>
+            <select class="fsel finp" id="fsocial">
+              <option value="" disabled selected>Select one...</option>
+              <option>I have accounts but post inconsistently</option>
+              <option>I post regularly but get little engagement</option>
+              <option>I get views but no sales or enquiries</option>
+              <option>I have no social presence yet</option>
+              <option>I have a decent following but want to monetise better</option>
+            </select>
+          </div>
+
+          <div><p class="flabel">// MONTHLY REVENUE FROM SOCIAL MEDIA RIGHT NOW</p>
+            <select class="fsel finp" id="frevenue">
+              <option value="" disabled selected>Select one...</option>
+              <option>£0 — nothing yet</option>
+              <option>£1 – £500/month</option>
+              <option>£500 – £2,000/month</option>
+              <option>£2,000 – £5,000/month</option>
+              <option>£5,000+/month</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+
+          <div><p class="flabel">// WHAT IS YOUR GOAL FROM SOCIAL MEDIA IN THE NEXT 90 DAYS?</p>
+            <textarea class="ftxt" id="fgoal" placeholder="e.g. Get 10 new bookings per month, sell 50 ebooks, build an audience of 5,000 — be as specific as possible"></textarea>
+          </div>
+
+          <div><p class="flabel">// BIGGEST CHALLENGE OR FRUSTRATION RIGHT NOW? *</p>
+            <textarea class="ftxt" id="fc" placeholder="Tell Casey exactly what's not working and what you've already tried. The more detail you give, the better prepared Casey will be before your call." required></textarea>
+          </div>
+
+          <div><p class="flabel">// HOW DID YOU FIND META NEO?</p>
+            <select class="fsel finp" id="fsource">
+              <option value="" disabled selected>Select one...</option>
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>Whop</option>
+              <option>Google search</option>
+              <option>Word of mouth / referral</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div><p class="flabel">// ANYTHING ELSE CASEY SHOULD KNOW BEFORE THE CALL?</p>
+            <textarea class="ftxt" id="fextra" style="min-height:70px;" placeholder="Optional — add anything else that would help Casey prepare for your call"></textarea>
+          </div>
+
+          <button class="btn-sub" onclick="sendForm()">SEND MY DETAILS — CASEY WILL BE IN TOUCH →</button>
+          <p class="form-note">// CASEY WILL REVIEW YOUR ANSWERS AND RESPOND WITHIN 24 HOURS TO CONFIRM YOUR CALL</p>
+        </div>
+      </div>
+      <div class="fsuccess" id="fSuccess">
+        <div class="si">✓</div>
+        <h3>YOU'RE ON CASEY'S RADAR.</h3>
+        <p>Expect a response within 24 hours to confirm your discovery call. Check your spam if you don't hear back.</p>
+      </div>
+    </div>
+  </div>
+</div></div>
+<div class="rule"></div>
+<section class="process">
+  <div class="container">
+    <p class="section-kicker reveal" style="font-family:var(--mono);font-size:.6rem;color:var(--g);letter-spacing:.25em;margin-bottom:16px;">// HOW IT WORKS</p>
+    <h2 class="reveal d1" style="font-family:var(--display);font-size:clamp(2rem,4vw,4rem);letter-spacing:.02em;line-height:1;">From booking<br>to results.</h2>
+    <div class="proc-grid">
+      <div class="proc-step reveal"><div class="psn">01</div><div class="pst">Book the call</div><div class="psd">Use Calendly to pick a slot or leave your details and Casey will confirm within 24 hours.</div></div>
+      <div class="proc-step reveal d1"><div class="psn">02</div><div class="pst">30-minute call</div><div class="psd">Audit, gap identification, path forward. Honest and direct. You leave with clarity regardless of what happens next.</div></div>
+      <div class="proc-step reveal d2"><div class="psn">03</div><div class="pst">Custom proposal</div><div class="psd">If there's a fit, Casey puts together a tailored proposal based on exactly what your business needs.</div></div>
+      <div class="proc-step reveal d3"><div class="psn">04</div><div class="pst">Execute together</div><div class="psd">Done-with-you implementation. Real work, real results, tracked and measured throughout.</div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="fl">METANEO</div><nav class="fn"><a href="index.html">Home</a><a href="ebooks.html">Guides</a><a href="free-guide.html">Free Guide</a><a href="https://www.instagram.com/_metaneo_" target="_blank">Instagram</a><a href="policies.html">Legal</a></nav></footer>
+<script>
+
+// ── PAGE MATRIX ──
+(function(){
+  const c=document.getElementById('pgMatrix');
+  if(!c)return;
+  const x=c.getContext('2d'),ch='METANEO01アイウエオカキクケコ01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let cols,drops;
+  function init(){c.width=window.innerWidth;c.height=window.innerHeight;cols=Math.floor(c.width/13);drops=Array(cols).fill(1);x.font="13px 'DM Mono',monospace";}
+  function draw(){x.fillStyle='rgba(8,9,8,0.048)';x.fillRect(0,0,c.width,c.height);x.fillStyle='#00e63d';drops.forEach((y,i)=>{const s=ch[Math.floor(Math.random()*ch.length)];x.globalAlpha=Math.random()*.5+.12;x.fillText(s,i*13,y*13);x.globalAlpha=1;if(y*13>c.height&&Math.random()>.975)drops[i]=0;drops[i]++;});};
+  init();setInterval(draw,52);window.addEventListener('resize',init);
+})();
+
+const cur=document.getElementById('cur'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a)})();
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>60));
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*60);});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+function sendForm(){
+  const n=document.getElementById('fn');
+  const e=document.getElementById('fe');
+  const bt=document.getElementById('fbtype');
+  const ch=document.getElementById('fc');
+  function highlight(el){el.style.borderColor='#e05050';el.focus();setTimeout(()=>el.style.borderColor='rgba(0,230,61,.15)',2500);}
+  if(!n.value.trim()){highlight(n);return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim())){highlight(e);return;}
+  if(!bt.value.trim()){highlight(bt);return;}
+  if(!ch.value.trim()){highlight(ch);return;}
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('fSuccess').style.display='block';
+  // To connect to backend (Formspree recommended):
+  // fetch('https://formspree.io/f/YOUR_FORM_ID',{
+  //   method:'POST',headers:{'Content-Type':'application/json'},
+  //   body:JSON.stringify({
+  //     name:n.value, email:e.value,
+  //     instagram:document.getElementById('fi').value,
+  //     phone:document.getElementById('fph').value,
+  //     who:document.getElementById('ft').value,
+  //     businessType:bt.value,
+  //     services:document.getElementById('fservices').value,
+  //     location:document.getElementById('floc').value,
+  //     website:document.getElementById('fweb').value,
+  //     offers:document.getElementById('foffers').value,
+  //     socialPresence:document.getElementById('fsocial').value,
+  //     revenue:document.getElementById('frevenue').value,
+  //     goal:document.getElementById('fgoal').value,
+  //     challenge:ch.value,
+  //     source:document.getElementById('fsource').value,
+  //     extra:document.getElementById('fextra').value
+  //   })
+  // });
+}
+</script>
+</body>
+</html>

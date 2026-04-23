@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Neo — The Complete Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080908;--bg2:#0d0f0d;--bg3:#111311;--g:#00e63d;--g3:rgba(0,230,61,0.06);--gb:rgba(0,230,61,0.2);--gold:#f0b429;--goldb:rgba(240,180,41,0.25);--gold3:rgba(240,180,41,0.06);--w:#f5f7f5;--w2:#c8cec8;--muted:#5c665c;--display:'Bebas Neue',sans-serif;--serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;}
+body{background:var(--bg);color:var(--w);font-family:var(--sans);overflow-x:hidden;cursor:none;}
+.cur{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:exclusion;}
+.cur-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(0,230,61,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .45s,height .45s,border-color .3s;}
+body:has(a:hover) .cur-ring{width:58px;height:58px;border-color:var(--g);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;transition:all .5s;}
+nav.solid{background:rgba(8,9,8,.94);border-bottom:1px solid rgba(0,230,61,.08);backdrop-filter:blur(20px);}
+.nav-logo{font-family:var(--display);font-size:1.3rem;letter-spacing:.1em;color:var(--g);text-decoration:none;}
+.nav-logo em{color:var(--w);font-style:normal;}
+.nav-right{display:flex;gap:24px;align-items:center;}
+.nav-back{font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.12em;text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--w);}
+.nav-cta-sm{font-family:var(--mono);font-size:.6rem;color:var(--bg);background:var(--g);padding:9px 18px;text-decoration:none;letter-spacing:.1em;transition:all .2s;}
+.nav-cta-sm:hover{background:#00ff44;}
+.container{max-width:1100px;margin:0 auto;padding:0 40px;}
+.rule{height:1px;background:rgba(245,247,245,.06);}
+/* HERO */
+.hero-eb{padding:140px 0 80px;text-align:center;position:relative;overflow:hidden;}
+.hero-eb::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(0,230,61,.06) 0%,transparent 70%);pointer-events:none;}
+.eb-tag{font-family:var(--mono);font-size:.62rem;color:var(--g);letter-spacing:.22em;margin-bottom:24px;animation:up .6s ease .1s both;display:block;}
+.eb-h{font-family:var(--display);font-size:clamp(3rem,9vw,8rem);line-height:.9;letter-spacing:.02em;margin-bottom:20px;animation:up 1s cubic-bezier(.16,1,.3,1) .2s both;}
+.eb-h em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--w2);}
+.eb-h .g{color:var(--g);}
+.eb-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:560px;margin:0 auto 36px;font-weight:300;animation:up .7s ease .4s both;}
+.eb-prices{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:36px;animation:up .6s ease .5s both;}
+.eb-each{font-family:var(--mono);font-size:.78rem;color:var(--muted);}
+.eb-bundle{background:var(--gold3);border:1px solid var(--goldb);padding:10px 22px;text-align:center;}
+.eb-bundle-lbl{font-family:var(--mono);font-size:.52rem;color:var(--gold);letter-spacing:.2em;display:block;margin-bottom:4px;}
+.eb-bundle-p{font-family:var(--mono);font-size:1.1rem;color:var(--gold);}
+.eb-bundle-save{font-family:var(--mono);font-size:.5rem;color:var(--muted);letter-spacing:.1em;}
+.eb-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:up .6s ease .6s both;}
+.btn-primary-eb{display:inline-block;background:var(--gold);color:#0a0800;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;padding:16px 32px;text-decoration:none;transition:all .25s;text-transform:uppercase;}
+.btn-primary-eb:hover{background:#f5c242;transform:translateY(-2px);}
+.btn-ghost-eb{display:inline-block;font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.1em;padding:16px 20px;text-decoration:none;border:1px solid rgba(245,247,245,.1);transition:all .25s;}
+.btn-ghost-eb:hover{border-color:var(--g);color:var(--g);}
+/* BOOKS */
+.books{padding:100px 0;}
+.books-tag{font-family:var(--mono);font-size:.6rem;color:var(--g);letter-spacing:.22em;margin-bottom:16px;}
+.books-title{font-family:var(--display);font-size:clamp(2rem,4vw,4rem);letter-spacing:.02em;margin-bottom:56px;line-height:1;}
+.book-block{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2px;border:1px solid rgba(0,230,61,.1);transition:border-color .3s;}
+.book-block:hover{border-color:rgba(0,230,61,.25);}
+.book-block.rev{direction:rtl;}
+.book-block.rev>*{direction:ltr;}
+.book-vis{background:var(--bg2);padding:52px 44px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.book-vis::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,230,61,.05) 0%,transparent 60%);}
+.bv-num{font-family:var(--display);font-size:6rem;color:rgba(0,230,61,.07);line-height:1;margin-bottom:16px;}
+.bv-title{font-family:var(--display);font-size:1.6rem;letter-spacing:.04em;color:var(--w);margin-bottom:8px;line-height:1.1;position:relative;}
+.bv-sub{font-family:var(--mono);font-size:.58rem;color:var(--g);letter-spacing:.15em;position:relative;}
+.bv-price-row{margin-top:24px;display:flex;align-items:center;gap:12px;position:relative;}
+.bv-price{font-family:var(--display);font-size:1.8rem;color:var(--w);}
+.btn-buy{font-family:var(--mono);font-size:.6rem;color:var(--bg);background:var(--g);padding:8px 16px;text-decoration:none;letter-spacing:.1em;transition:all .2s;}
+.btn-buy:hover{background:#00ff44;}
+.book-content{padding:44px;background:var(--g3);}
+.bc-tag{font-family:var(--mono);font-size:.56rem;color:var(--g);letter-spacing:.2em;margin-bottom:16px;}
+.bc-hook{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:24px;font-weight:300;}
+.ch-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+.ch-item{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid rgba(0,230,61,.06);align-items:flex-start;}
+.ch-item:last-child{border-bottom:none;}
+.ch-n{font-family:var(--mono);font-size:.56rem;color:rgba(0,230,61,.4);flex-shrink:0;margin-top:2px;}
+.ch-text strong{display:block;font-size:.85rem;font-weight:500;margin-bottom:2px;}
+.ch-text span{font-size:.78rem;color:var(--muted);line-height:1.5;font-weight:300;}
+.ch-quote{margin-top:20px;padding:16px 20px;background:rgba(0,230,61,.04);border-left:2px solid var(--g);}
+.ch-quote p{font-size:.82rem;color:var(--muted);line-height:1.65;font-style:italic;}
+.ch-quote cite{font-family:var(--mono);font-size:.54rem;color:var(--g);letter-spacing:.1em;display:block;margin-top:8px;}
+/* BUNDLE */
+.bundle{padding:100px 0;background:var(--bg2);}
+.bundle-inner{border:1px solid var(--goldb);background:linear-gradient(135deg,var(--gold3) 0%,var(--g3) 100%);position:relative;overflow:hidden;}
+.bundle-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--g),var(--gold),var(--g));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.bundle-body{padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.btag{font-family:var(--mono);font-size:.58rem;color:var(--gold);letter-spacing:.25em;margin-bottom:14px;}
+.btitle{font-family:var(--display);font-size:clamp(2rem,4vw,4rem);letter-spacing:.02em;line-height:1;margin-bottom:14px;}
+.bdesc{font-size:.9rem;color:var(--muted);line-height:1.7;font-weight:300;}
+.bprow{display:flex;align-items:flex-end;gap:14px;margin-bottom:12px;}
+.bwas{font-family:var(--mono);font-size:.85rem;color:var(--muted);text-decoration:line-through;}
+.bnow{font-family:var(--display);font-size:3.2rem;color:var(--gold);line-height:1;}
+.bsave{display:inline-block;font-family:var(--mono);font-size:.58rem;color:var(--bg);background:var(--g);padding:4px 10px;letter-spacing:.1em;margin-bottom:16px;}
+.bincludes{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.bincludes li{font-family:var(--mono);font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.bincludes li::before{content:'✓';color:var(--g);}
+.btn-bundle{display:block;background:var(--gold);color:#0a0800;font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.12em;padding:18px;text-decoration:none;text-align:center;transition:all .25s;text-transform:uppercase;}
+.btn-bundle:hover{background:#f5c242;transform:translateY(-1px);}
+/* FAQ */
+.faq{padding:100px 0;}
+.faq-title{font-family:var(--display);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.02em;margin-bottom:44px;}
+.faq-list{display:flex;flex-direction:column;gap:2px;}
+.faq-item{border:1px solid rgba(0,230,61,.1);background:var(--g3);}
+.faq-q{padding:22px 24px;cursor:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:.92rem;font-weight:500;transition:background .2s;}
+.faq-q:hover{background:rgba(0,230,61,.08);}
+.faq-icon{font-family:var(--mono);color:var(--g);font-size:1.1rem;flex-shrink:0;transition:transform .3s;}
+.faq-a{display:none;padding:0 24px 20px;font-size:.85rem;color:var(--muted);line-height:1.7;font-weight:300;border-top:1px solid rgba(0,230,61,.08);padding-top:16px;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-item.open .faq-a{display:block;}
+footer{border-top:1px solid rgba(0,230,61,.08);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.fl{font-family:var(--display);font-size:1rem;letter-spacing:.1em;color:var(--g);}
+.fn{display:flex;gap:20px;flex-wrap:wrap;}
+.fn a{font-family:var(--mono);font-size:.56rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;transition:color .2s;}
+.fn a:hover{color:var(--w);}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@media(max-width:768px){nav{padding:18px 24px;}.book-block,.book-block.rev{grid-template-columns:1fr;direction:ltr;}.bundle-body{grid-template-columns:1fr;padding:32px 24px;}.eb-prices{flex-direction:column;align-items:center;}footer{padding:20px 24px;flex-direction:column;text-align:center;}}
+
+#pgMatrix{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.16;}
+.pg-vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(8,9,8,.7) 0%,rgba(8,9,8,0) 100%);}
+</style>
+</head>
+<body>
+<canvas id="pgMatrix"></canvas>
+<div class="pg-vig"></div>
+<div class="cur" id="cur"></div><div class="cur-ring" id="cr"></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo">META<em>NEO</em></a>
+  <div class="nav-right"><a href="index.html" class="nav-back">← Home</a><a href="free-guide.html" class="nav-cta-sm">FREE GUIDE →</a></div>
+</nav>
+<section class="hero-eb">
+  <div class="container">
+    <span class="eb-tag">// THE META NEO SERIES — 3 PAID GUIDES</span>
+    <h1 class="eb-h">THE COMPLETE<em>system.</em><span class="g">STRATEGY. ENGINE. ALGORITHM.</span></h1>
+    <p class="eb-sub">Three guides. Three gaps closed. Everything you need to grow on social media and turn that growth into real income.</p>
+    <div class="eb-prices">
+      <p class="eb-each">£19.99 each —</p>
+      <div class="eb-bundle"><span class="eb-bundle-lbl">// BEST VALUE</span><div class="eb-bundle-p">£39.99 <span style="font-size:.75rem;color:var(--muted)">bundle</span></div><div class="eb-bundle-save">SAVE £19.98</div></div>
+    </div>
+    <div class="eb-ctas"><a href="https://whop.com/metaneo" target="_blank" class="btn-primary-eb">GET THE FULL BUNDLE — £39.99 →</a><a href="#books" class="btn-ghost-eb">SEE WHAT'S INSIDE ↓</a></div>
+  </div>
+</section>
+<div class="rule"></div>
+<section class="books" id="books">
+  <div class="container">
+    <p class="books-tag reveal">// INSIDE EACH GUIDE</p>
+    <h2 class="books-title reveal d1">Three books.<br>One complete system.</h2>
+    <!-- BOOK 1 -->
+    <div class="book-block reveal">
+      <div class="book-vis"><div class="bv-num">01</div><h3 class="bv-title">The Social Media<br>Game Strategy</h3><p class="bv-sub">// STRATEGY — THE PLAYERS & THE GAMES</p><div class="bv-price-row"><span class="bv-price">£19.99</span><a href="https://whop.com/metaneo" target="_blank" class="btn-buy">BUY NOW →</a></div></div>
+      <div class="book-content"><p class="bc-tag">// WHAT YOU'LL LEARN</p><p class="bc-hook">Social media is a game with 7 players, two simultaneous games, and predictable incentives. Once you understand the game, you stop guessing and start winning.</p>
+      <ul class="ch-list">
+        <li class="ch-item"><span class="ch-n">[01]</span><div class="ch-text"><strong>The 7 Players in the Content Game</strong><span>The algorithm, passive viewers, active buyers, entertainment creators, education creators, and brands. Know them all.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[02]</span><div class="ch-text"><strong>What Each Player Wants Most</strong><span>Map the incentives of every player. When your content gives each player more of what they want, they push it further automatically.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[03]</span><div class="ch-text"><strong>The Two Games — Awareness vs Conversion</strong><span>Both run on every platform simultaneously. Most people play the wrong game. This shows you which to play and when.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[04]</span><div class="ch-text"><strong>The Psychology of Sharing</strong><span>Why people share content, the credit transfer rule, and how to engineer shares deliberately instead of hoping for them.</span></div></li>
+      </ul>
+      <div class="ch-quote"><p>"Social media is one giant game. The secret to winning it is understanding why different players make the decisions they make."</p><cite>— FROM THE SOCIAL MEDIA GAME STRATEGY</cite></div></div>
+    </div>
+    <!-- BOOK 2 -->
+    <div class="book-block rev reveal d1">
+      <div class="book-vis"><div class="bv-num">02</div><h3 class="bv-title">The Content Engine<br>Playbook</h3><p class="bv-sub">// SYSTEM — BUILD THE MACHINE</p><div class="bv-price-row"><span class="bv-price">£19.99</span><a href="https://whop.com/metaneo" target="_blank" class="btn-buy">BUY NOW →</a></div></div>
+      <div class="book-content"><p class="bc-tag">// WHAT YOU'LL LEARN</p><p class="bc-hook">You don't need to be everywhere. You need one content engine on one platform — running consistently. This gives you the exact 7-step system to build it.</p>
+      <ul class="ch-list">
+        <li class="ch-item"><span class="ch-n">[01]</span><div class="ch-text"><strong>Choosing the Right Platform</strong><span>The tiebreaker scales — effort, AI risk, LTV, conversion, half-life — tell you exactly where to play.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[02]</span><div class="ch-text"><strong>The Quality-Quantity Accordion</strong><span>The exact order most people get wrong. Hit 7/10 quality first, then volume, then push to 9/10.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[03]</span><div class="ch-text"><strong>Automate Your Lead Capture</strong><span>ManyChat, keyword triggers, email automation — how to turn every comment into a lead without manual effort.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[04]</span><div class="ch-text"><strong>The 7-Step Engine Blueprint</strong><span>Research winners, reverse-engineer patterns, engage deeply, capture leads, sell with email. The complete playbook.</span></div></li>
+      </ul>
+      <div class="ch-quote"><p>"A weak fisherman in a pond full of fish will eat better than an expert fisherman in an empty one."</p><cite>— FROM THE CONTENT ENGINE PLAYBOOK</cite></div></div>
+    </div>
+    <!-- BOOK 3 -->
+    <div class="book-block reveal d2">
+      <div class="book-vis"><div class="bv-num">03</div><h3 class="bv-title">The Algorithm<br>Decoded</h3><p class="bv-sub">// MECHANICS — HOW IT REALLY WORKS</p><div class="bv-price-row"><span class="bv-price">£19.99</span><a href="https://whop.com/metaneo" target="_blank" class="btn-buy">BUY NOW →</a></div></div>
+      <div class="book-content"><p class="bc-tag">// WHAT YOU'LL LEARN</p><p class="bc-hook">Every platform uses the same core mechanic. Once you understand how it works under the hood, every content decision you make becomes deliberate.</p>
+      <ul class="ch-list">
+        <li class="ch-item"><span class="ch-n">[01]</span><div class="ch-text"><strong>The Digital Fingerprint</strong><span>Computer vision, audio transcription, caption, metadata — how the algorithm reads your video four ways simultaneously.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[02]</span><div class="ch-text"><strong>The Sample Group of 200</strong><span>The most critical moment for every video you post. What those 200 people do determines everything that follows.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[03]</span><div class="ch-text"><strong>The 4 Horsemen of Engagement</strong><span>The only four things that move all three algorithm metrics upward simultaneously.</span></div></li>
+        <li class="ch-item"><span class="ch-n">[04]</span><div class="ch-text"><strong>What Doesn't Matter</strong><span>Posting time. Hashtags. Caption length. Settings hacks. Stop wasting energy on things with zero impact.</span></div></li>
+      </ul>
+      <div class="ch-quote"><p>"The algorithm is not your enemy. It is a machine with a single job — match content with viewers most likely to watch it."</p><cite>— FROM THE ALGORITHM DECODED</cite></div></div>
+    </div>
+  </div>
+</section>
+<div class="rule"></div>
+<!-- BUNDLE -->
+<section class="bundle">
+  <div class="container">
+    <div class="bundle-inner reveal">
+      <div class="bundle-body">
+        <div><p class="btag">// BEST VALUE — COMPLETE SERIES</p><h2 class="btitle">All three guides.<br>One price.</h2><p class="bdesc">Game Strategy gives you the framework. Content Engine gives you the system. Algorithm Decoded gives you the mechanics. Together — the complete picture.</p></div>
+        <div>
+          <div class="bprow"><span class="bwas">£59.97</span><span class="bnow">£39.99</span></div>
+          <span class="bsave">YOU SAVE £19.98</span>
+          <ul class="bincludes">
+            <li>The Social Media Game Strategy (£19.99 value)</li>
+            <li>The Content Engine Playbook (£19.99 value)</li>
+            <li>The Algorithm Decoded (£19.99 value)</li>
+            <li>Instant download — read on any device</li>
+            <li>One-time payment — no subscription</li>
+          </ul>
+          <a href="https://whop.com/metaneo" target="_blank" class="btn-bundle">GET THE FULL BUNDLE — £39.99 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="rule"></div>
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2 class="faq-title reveal">Common questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Who are these guides for?<span class="faq-icon">+</span></div><div class="faq-a">Small business owners who want to use social media to get customers, and content creators who want to turn their audience into income. If you've been posting without results, or getting views without sales — these guides are for you.</div></div>
+      <div class="faq-item reveal d1"><div class="faq-q" onclick="toggleFaq(this)">Do I need all three or can I start with one?<span class="faq-icon">+</span></div><div class="faq-a">Each guide works standalone. But they're designed as a series — Strategy first, then Engine, then Algorithm. Reading all three gives you the complete picture. The bundle is the most efficient way to get there.</div></div>
+      <div class="faq-item reveal d2"><div class="faq-q" onclick="toggleFaq(this)">Is this theory or practical?<span class="faq-icon">+</span></div><div class="faq-a">Both. Every concept is explained clearly, but every section ends with something actionable. The Algorithm Decoded has a pre-post checklist. The Content Engine has a 7-step playbook. The Game Strategy has a full framework you fill in for your own account.</div></div>
+      <div class="faq-item reveal d3"><div class="faq-q" onclick="toggleFaq(this)">Does this work if I have zero followers?<span class="faq-icon">+</span></div><div class="faq-a">Yes — and arguably better. The algorithm doesn't care about your follower count. It cares about content quality and topic consistency. Starting fresh means no contaminated fit score. These guides tell you exactly how to build it right from the beginning.</div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="fl">METANEO</div><nav class="fn"><a href="index.html">Home</a><a href="free-guide.html">Free Guide</a><a href="discovery.html">Consulting</a><a href="https://www.instagram.com/_metaneo_" target="_blank">Instagram</a><a href="policies.html">Legal</a></nav></footer>
+<script>
+
+// ── PAGE MATRIX ──
+(function(){
+  const c=document.getElementById('pgMatrix');
+  if(!c)return;
+  const x=c.getContext('2d'),ch='METANEO01アイウエオカキクケコ01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let cols,drops;
+  function init(){c.width=window.innerWidth;c.height=window.innerHeight;cols=Math.floor(c.width/13);drops=Array(cols).fill(1);x.font="13px 'DM Mono',monospace";}
+  function draw(){x.fillStyle='rgba(8,9,8,0.048)';x.fillRect(0,0,c.width,c.height);x.fillStyle='#00e63d';drops.forEach((y,i)=>{const s=ch[Math.floor(Math.random()*ch.length)];x.globalAlpha=Math.random()*.5+.12;x.fillText(s,i*13,y*13);x.globalAlpha=1;if(y*13>c.height&&Math.random()>.975)drops[i]=0;drops[i]++;});};
+  init();setInterval(draw,52);window.addEventListener('resize',init);
+})();
+
+const cur=document.getElementById('cur'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a)})();
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>60));
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*60);});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+function toggleFaq(el){const it=el.parentElement;const op=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open');}
+</script>
+</body>
+</html>

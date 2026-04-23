@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Neo — Your Guide Is On Its Way</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080908;--bg2:#0d0f0d;--bg3:#111311;--g:#00e63d;--g2:rgba(0,230,61,0.12);--g3:rgba(0,230,61,0.06);--gb:rgba(0,230,61,0.2);--gold:#f0b429;--goldb:rgba(240,180,41,0.25);--gold3:rgba(240,180,41,0.06);--w:#f5f7f5;--w2:#c8cec8;--muted:#5c665c;--display:'Bebas Neue',sans-serif;--serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;}
+body{background:var(--bg);color:var(--w);font-family:var(--sans);overflow-x:hidden;cursor:none;min-height:100vh;}
+#tyMatrix{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.22;}
+.ty-vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 50% 30%,rgba(8,9,8,.6) 0%,rgba(8,9,8,0) 100%);}
+.cur{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:exclusion;}
+.cur-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(0,230,61,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .45s,height .45s,border-color .3s;}
+body:has(a:hover) .cur-ring{width:58px;height:58px;border-color:var(--g);}
+nav{position:relative;z-index:10;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,230,61,.08);}
+.nav-logo{font-family:var(--display);font-size:1.3rem;letter-spacing:.1em;color:var(--g);text-decoration:none;}
+.nav-logo em{color:var(--w);font-style:normal;}
+.nav-confirm{font-family:var(--mono);font-size:.6rem;color:var(--g);letter-spacing:.15em;display:flex;align-items:center;gap:8px;}
+.ndot{width:7px;height:7px;background:var(--g);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.page{max-width:860px;margin:0 auto;padding:60px 24px 100px;position:relative;z-index:2;}
+.confirm-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.62rem;color:var(--g);letter-spacing:.18em;border:1px solid var(--gb);background:var(--g3);padding:10px 20px;margin-bottom:40px;animation:up .6s ease .1s both;}
+.hero-confirm{margin-bottom:56px;animation:up .8s cubic-bezier(.16,1,.3,1) .2s both;}
+.hero-confirm h1{font-family:var(--display);font-size:clamp(2.5rem,6vw,5.5rem);line-height:.92;letter-spacing:.02em;margin-bottom:16px;}
+.hero-confirm h1 .g{color:var(--g);}
+.hero-confirm h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--w2);}
+.hero-confirm p{font-size:1rem;color:var(--muted);line-height:1.7;max-width:520px;font-weight:300;}
+.hero-confirm p strong{color:var(--w);font-weight:500;}
+.rule{height:1px;background:rgba(245,247,245,.06);margin:48px 0;}
+/* OFFER BOX */
+.offer-box{border:1px solid var(--goldb);background:linear-gradient(135deg,rgba(240,180,41,.04) 0%,rgba(0,230,61,.03) 100%);position:relative;overflow:hidden;animation:up .8s ease .3s both;}
+.offer-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--g),var(--gold),var(--g));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.offer-head{padding:28px 36px;border-bottom:1px solid var(--goldb);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.offer-head-left .otag{font-family:var(--mono);font-size:.58rem;color:var(--gold);letter-spacing:.22em;margin-bottom:8px;}
+.offer-head-left h2{font-family:var(--display);font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:.03em;line-height:1.1;}
+.countdown-wrap{text-align:right;}
+.cd-label{font-family:var(--mono);font-size:.52rem;color:var(--muted);letter-spacing:.15em;margin-bottom:6px;}
+.countdown{display:flex;gap:6px;align-items:center;justify-content:flex-end;}
+.cdb{background:rgba(240,180,41,.08);border:1px solid var(--goldb);padding:8px 12px;text-align:center;min-width:52px;}
+.cdn{font-family:var(--display);font-size:1.6rem;color:var(--gold);line-height:1;display:block;}
+.cdl{font-family:var(--mono);font-size:.42rem;color:var(--muted);letter-spacing:.1em;display:block;margin-top:3px;}
+.cdsep{font-family:var(--mono);font-size:1.1rem;color:var(--gold);opacity:.5;animation:blink 1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:.5}50%{opacity:.1}}
+.offer-body{padding:32px 36px;}
+.books-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:32px;background:rgba(0,230,61,.05);}
+.bcard{background:var(--bg2);padding:24px 20px;transition:background .3s;}
+.bcard:hover{background:var(--bg3);}
+.bnum{font-family:var(--mono);font-size:.52rem;color:var(--g);letter-spacing:.2em;margin-bottom:12px;}
+.btitle{font-family:var(--display);font-size:1.1rem;letter-spacing:.03em;color:var(--w);margin-bottom:8px;line-height:1.1;}
+.bdesc{font-size:.78rem;color:var(--muted);line-height:1.55;font-weight:300;margin-bottom:14px;}
+.bprice{font-family:var(--mono);font-size:.65rem;color:var(--muted);text-decoration:line-through;}
+.price-sum{border:1px solid var(--goldb);background:var(--gold3);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:24px;}
+.price-left .plbl{font-family:var(--mono);font-size:.56rem;color:var(--muted);letter-spacing:.15em;margin-bottom:6px;}
+.price-was{font-family:var(--mono);font-size:.8rem;color:var(--muted);text-decoration:line-through;margin-bottom:4px;}
+.price-now{font-family:var(--display);font-size:3rem;color:var(--gold);line-height:1;}
+.price-now span{font-size:.9rem;color:var(--muted);}
+.psave{display:inline-block;font-family:var(--mono);font-size:.58rem;color:var(--bg);background:var(--g);padding:4px 10px;letter-spacing:.1em;margin-top:8px;}
+.price-right{display:flex;flex-direction:column;gap:10px;min-width:240px;}
+.btn-gold{display:block;background:var(--gold);color:#0a0800;font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.12em;padding:18px 28px;text-decoration:none;text-align:center;transition:all .25s;text-transform:uppercase;}
+.btn-gold:hover{background:#f5c242;transform:translateY(-1px);box-shadow:0 12px 36px rgba(240,180,41,.2);}
+.btn-skip{display:block;text-align:center;font-family:var(--mono);font-size:.58rem;color:var(--muted);text-decoration:none;padding:12px;transition:color .2s;cursor:none;}
+.btn-skip:hover{color:var(--w2);}
+.trust-row{display:flex;gap:20px;flex-wrap:wrap;padding:20px 36px;border-top:1px solid rgba(0,230,61,.08);}
+.trust-item{font-family:var(--mono);font-size:.56rem;color:var(--muted);letter-spacing:.08em;display:flex;align-items:center;gap:6px;}
+.trust-item::before{content:'✓';color:var(--g);}
+/* NEXT STEPS */
+.next{margin-top:56px;animation:up .7s ease .5s both;}
+.next-tag{font-family:var(--mono);font-size:.6rem;color:var(--g);letter-spacing:.22em;margin-bottom:20px;}
+.next-title{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.8rem);letter-spacing:.03em;margin-bottom:32px;line-height:1;}
+.steps-list{display:flex;flex-direction:column;gap:2px;}
+.step{display:grid;grid-template-columns:48px 1fr;gap:20px;padding:22px 24px;border:1px solid rgba(0,230,61,.08);background:var(--g3);transition:background .3s;align-items:start;}
+.step:hover{background:rgba(0,230,61,.08);}
+.stepn{font-family:var(--display);font-size:1.8rem;color:var(--g);opacity:.25;line-height:1;}
+.step-body strong{display:block;font-size:.92rem;font-weight:500;margin-bottom:4px;}
+.step-body span{font-size:.82rem;color:var(--muted);line-height:1.6;font-weight:300;}
+footer{position:relative;z-index:2;border-top:1px solid rgba(0,230,61,.08);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:60px;}
+.fl{font-family:var(--display);font-size:1rem;letter-spacing:.1em;color:var(--g);}
+.fn{display:flex;gap:20px;flex-wrap:wrap;}
+.fn a{font-family:var(--mono);font-size:.56rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;transition:color .2s;}
+.fn a:hover{color:var(--w);}
+.fc{font-family:var(--mono);font-size:.54rem;color:var(--muted);}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media(max-width:700px){.books-grid{grid-template-columns:1fr;}.offer-head{flex-direction:column;}.countdown-wrap{text-align:left;}.countdown{justify-content:flex-start;}.price-sum{flex-direction:column;}.price-right{width:100%;}.trust-row{padding:16px 24px;}.offer-head,.offer-body{padding:20px 24px;}}
+</style>
+</head>
+<body>
+<canvas id="tyMatrix"></canvas>
+<div class="ty-vig"></div>
+<div class="cur" id="cur"></div><div class="cur-ring" id="cr"></div>
+<nav>
+  <a href="index.html" class="nav-logo">META<em>NEO</em></a>
+  <div class="nav-confirm"><div class="ndot"></div>GUIDE ACCESS CONFIRMED</div>
+</nav>
+<div class="page">
+  <div class="confirm-badge"><div class="ndot"></div>GUIDE DELIVERY IN PROGRESS — CHECK YOUR INBOX</div>
+  <div class="hero-confirm">
+    <h1>YOUR GUIDE IS<br><em>on its way.</em><br><span class="g">WAIT —</span></h1>
+    <p>Check your inbox for <strong>"How to Turn Social Media Attention Into Income."</strong> While you wait — this is the only time you'll see this offer at this price.</p>
+  </div>
+  <div class="rule"></div>
+  <div class="offer-box">
+    <div class="offer-head">
+      <div class="offer-head-left">
+        <p class="otag">// ONE-TIME OFFER — THIS PAGE ONLY</p>
+        <h2>Get the complete Meta Neo<br>Series for less than half price.</h2>
+      </div>
+      <div class="countdown-wrap">
+        <p class="cd-label">// OFFER EXPIRES IN</p>
+        <div class="countdown">
+          <div class="cdb"><span class="cdn" id="cdm">14</span><span class="cdl">MIN</span></div>
+          <span class="cdsep">:</span>
+          <div class="cdb"><span class="cdn" id="cds">59</span><span class="cdl">SEC</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="offer-body">
+      <div class="books-grid">
+        <div class="bcard"><p class="bnum">// BOOK 01</p><h3 class="btitle">The Social Media Game Strategy</h3><p class="bdesc">The 7 players, the two games, and the complete framework for winning awareness and conversion.</p><p class="bprice">£19.99</p></div>
+        <div class="bcard"><p class="bnum">// BOOK 02</p><h3 class="btitle">The Content Engine Playbook</h3><p class="bdesc">How to pick the right platform, build a system that generates leads on autopilot, and turn content into customers.</p><p class="bprice">£19.99</p></div>
+        <div class="bcard"><p class="bnum">// BOOK 03</p><h3 class="btitle">The Algorithm Decoded</h3><p class="bdesc">The sample group of 200, the fit score, the boost mechanic. Exactly how the algorithm decides who sees your content.</p><p class="bprice">£19.99</p></div>
+      </div>
+      <div class="price-sum">
+        <div class="price-left">
+          <p class="plbl">// BUNDLE PRICE TODAY</p>
+          <p class="price-was">Normal price: £59.97</p>
+          <p class="price-now">£29.99 <span>/ one-time</span></p>
+          <span class="psave">YOU SAVE £29.98 — 50% OFF</span>
+        </div>
+        <div class="price-right">
+          <a href="https://whop.com/metaneo" target="_blank" class="btn-gold">YES — GIVE ME THE FULL SERIES →</a>
+          <span class="btn-skip" id="skipBtn">No thanks, I'll stick with just the free guide for now</span>
+        </div>
+      </div>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item">INSTANT DOWNLOAD</div>
+      <div class="trust-item">ONE-TIME PAYMENT</div>
+      <div class="trust-item">NO SUBSCRIPTION</div>
+      <div class="trust-item">READ ON ANY DEVICE</div>
+      <div class="trust-item">THIS PAGE ONLY</div>
+    </div>
+  </div>
+  <div class="next">
+    <p class="next-tag">// WHAT HAPPENS NEXT</p>
+    <h3 class="next-title">Whether you grab the bundle<br>or not — here's what's coming.</h3>
+    <div class="steps-list">
+      <div class="step"><span class="stepn">01</span><div class="step-body"><strong>Check your inbox right now</strong><span>Your free guide is being delivered. If you don't see it in 5 minutes, check your spam folder and mark Meta Neo as a trusted sender.</span></div></div>
+      <div class="step"><span class="stepn">02</span><div class="step-body"><strong>Run the 3 Gap diagnosis</strong><span>Page 4 of the guide has the self-assessment. Do it before you do anything else on social media. Takes 2 minutes. Changes everything.</span></div></div>
+      <div class="step"><span class="stepn">03</span><div class="step-body"><strong>Expect a follow-up from Casey</strong><span>Over the next 7 days you'll receive the algorithm breakdown, the content system framework, and the 4 Horsemen of Engagement — all free, direct from the paid series.</span></div></div>
+      <div class="step"><span class="stepn">04</span><div class="step-body"><strong>Take one action today</strong><span>Before you close this page — write down the answer to this: who is the one person you're making content for, and what is the one problem you solve for them?</span></div></div>
+    </div>
+  </div>
+</div>
+<footer><div class="fl">METANEO</div><nav class="fn"><a href="index.html">Home</a><a href="ebooks.html">Guides</a><a href="discovery.html">Consulting</a><a href="policies.html">Legal</a></nav><div class="fc">© 2025 Meta Neo</div></footer>
+<script>
+// ── MATRIX RAIN ──
+(function(){
+  const c=document.getElementById('tyMatrix');
+  if(!c)return;
+  const x=c.getContext('2d');
+  const ch='METANEO01アイウエオカキクケコ01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let cols,drops;
+  function init(){
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    cols=Math.floor(c.width/13);drops=Array(cols).fill(1);
+    x.font="13px 'DM Mono',monospace";
+  }
+  function draw(){
+    x.fillStyle='rgba(8,9,8,0.048)';x.fillRect(0,0,c.width,c.height);
+    x.fillStyle='#00e63d';
+    drops.forEach((y,i)=>{
+      const s=ch[Math.floor(Math.random()*ch.length)];
+      x.globalAlpha=Math.random()*.52+.13;
+      x.fillText(s,i*13,y*13);x.globalAlpha=1;
+      if(y*13>c.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    });
+  }
+  init();setInterval(draw,50);window.addEventListener('resize',init);
+})();
+
+const cur=document.getElementById('cur'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function a(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a)})();
+let t=14*60+59;
+function upd(){const m=Math.floor(t/60),s=t%60;document.getElementById('cdm').textContent=String(m).padStart(2,'0');document.getElementById('cds').textContent=String(s).padStart(2,'0');if(t<=0){clearInterval(ti);return;}t--;}
+upd();const ti=setInterval(upd,1000);
+document.getElementById('skipBtn').addEventListener('click',()=>{document.querySelector('.next').scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>
